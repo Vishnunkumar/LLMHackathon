@@ -8,8 +8,11 @@ from pdfreader import SimplePDFViewer
 from langchain.embeddings import HuggingFaceEmbeddings
 from sklearn.metrics import DistanceMetric
 
+# The code `f = open('config.json', encoding="utf-8")` opens the file `config.json` in read mode with
+# the specified encoding of "utf-8".
 f = open('config.json', encoding="utf-8")
 data = json.load(f)
+
 s_email = data['sender_email']
 s_pass = data['sender_password']
 
@@ -19,6 +22,19 @@ dist = DistanceMetric.get_metric('euclidean')
 cvs_list = []
 
 def score_job_tile(job_desc, cv_content):
+    """
+    The function `score_job_tile` calculates the similarity score between a job description and a CV
+    content using embeddings and pairwise distance.
+    
+    :param job_desc: The job description, which is a string that describes the requirements and
+    responsibilities of a job position. It provides information about the skills, qualifications, and
+    experience needed for the job
+    :param cv_content: The `cv_content` parameter represents the content of a candidate's CV (Curriculum
+    Vitae), which typically includes information about their education, work experience, skills, and
+    other relevant details
+    :return: the score or similarity between the job description and the content of a CV.
+    """
+
     job_result = np.array(embeddings.embed_query(job_desc)).reshape(1, -1)
     job_ttl = np.array(embeddings.embed_query(cv_content)).reshape(1, -1)
     return dist.pairwise(job_result, job_ttl)[0][0]
@@ -35,6 +51,8 @@ st.markdown("### Upload CVs")
 cvs = st.file_uploader("Chose multiple CVs or single CV", accept_multiple_files=True)
 cvs_sub = st.button("Load CVs")
 
+# The code block `if cvs_sub:` checks if the "Load CVs" button has been clicked. If it has, then it
+# iterates over each uploaded CV file (`fil_`) and performs the following steps:
 if cvs_sub:
     for fil_ in cvs:
         cv_json = {}
@@ -50,6 +68,8 @@ if cvs_sub:
     cv_df.sort_values(by=['score'], inplace=True)
     st.dataframe(cv_df.iloc[:5,:])
 
+ # This code block is responsible for sending emails to the top 5 candidates who have been shortlisted
+ # based on their CV scores.
     emails = st.button("Send Emails")
     if emails:
         for i in range(cv_df.iloc[:5,:]):
