@@ -3,3 +3,4 @@ numpy
 pdfreader
 huggingface_hub
 langchain
+scikit-learn
