@@ -4,3 +4,4 @@ pdfreader
 huggingface_hub
 langchain
 scikit-learn
+sentence-transformers
