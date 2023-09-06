@@ -1,3 +1,0 @@
-pdfreader
-streamlit
-langchain
