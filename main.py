@@ -15,7 +15,7 @@ st.text("A space for HR executives to analyze and optimize the selection process
 embeddings = HuggingFaceEmbeddings()
 dist = DistanceMetric.get_metric('euclidean')
 repo_id = "tiiuae/falcon-7b"
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = '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'
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets['HUGGINGFACEHUB_API_TOKEN']
 
 def score_job_tile(job_desc, job_title):
     """
