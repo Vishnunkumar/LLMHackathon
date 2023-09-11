@@ -11,7 +11,7 @@ from langchain.llms import HuggingFaceEndpoint, HuggingFaceHub, HuggingFacePipel
 from langchain import PromptTemplate, LLMChain
 
 st.title(":blue[HR Buddy]")
-st.text("A space for HR to analyze and optimize the selection process")
+st.text("A space for HR executives to analyze and optimize the selection process")
 embeddings = HuggingFaceEmbeddings()
 dist = DistanceMetric.get_metric('euclidean')
 repo_id = "tiiuae/falcon-7b"
