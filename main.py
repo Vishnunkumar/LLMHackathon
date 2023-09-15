@@ -21,7 +21,7 @@ st.title("Streamlit Hackathon 2023")
 st.subheader(":purple[QA-PDF]",divider="rainbow")
 st.markdown("**A bot to answer questions from the uploaded PDF document**")
 
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets("HUGGINGFACEHUB_API_TOKEN")
+os.environ['HUGGINGFACEHUB_API_TOKEN'] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 embeddings = HuggingFaceEmbeddings()
 repo_id = "tiiuae/falcon-7b-instruct"
 llm = HuggingFaceHub(repo_id=repo_id)
